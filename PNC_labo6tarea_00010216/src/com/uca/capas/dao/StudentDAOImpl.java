@@ -63,10 +63,8 @@ public class StudentDAOImpl implements StudentDAO {
 	@Transactional
 	public int delete(Student s) throws DataAccessException {
 		try {
-			if( s != null) {
-				entityManager.remove(s);
-				entityManager.flush();
-			}
+			entityManager.remove(entityManager.contains(s) ? s : entityManager.merge(s));
+			entityManager.flush();	
 			return 1;
 		}catch(Throwable e) {
 			e.printStackTrace();

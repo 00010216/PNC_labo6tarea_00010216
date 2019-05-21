@@ -101,26 +101,24 @@ public class MainController {
 	@RequestMapping(value = "/formUpdate/{cStudent}")
 	public ModelAndView formUpdate(@PathVariable int cStudent) {
 		ModelAndView mav = new ModelAndView();
-		//Student rstudent = searchByCode(cStudent) ;
 		Student rstudent =  null;
 		try {
 			rstudent = studentDao.findOne(cStudent);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		//mav.addObject("rstudent",rstudent);
-		//mav.setViewName("formUpdate");
 		mav.addObject("student",rstudent);
 		mav.setViewName("form");
 		return mav;
 	}
 	
-	/**@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ModelAndView delete(@RequestParam String sName) {
+	@RequestMapping(value = "/delete/{cStudent}")
+	public ModelAndView delete(@PathVariable int cStudent) {
 		ModelAndView mav = new ModelAndView();
-		Student s = searchByCode(sName);
+		Student s = null;
 		List<Student> students = null;
 		try {
+			s = studentDao.findOne(cStudent);
 			studentDao.delete(s); 
 			log.info("Elimino un usuario");
 		}catch(Exception e){
@@ -128,10 +126,9 @@ public class MainController {
 		}
 		//se manda nueva lista que deberia mostrar sin el usario eliminado
 		students = studentDao.findAll(); 
-		log.info(students.get(0).getlName());
 		mav.addObject("students",students);
 		mav.setViewName("main");
 		return mav;
-	}**/
+	}
 	
 }

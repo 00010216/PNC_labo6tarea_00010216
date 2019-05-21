@@ -31,9 +31,19 @@
 					<td>${students.lName}</td>
 					<td>${students.sAge}</td>
 					<td>${students.activoDelegate}</td>
+					
+					<td><form:form action = "${pageContext.request.contextPath}/formUpdate/${students.cStudent}" method = "post" >
+					<input type = "submit"  value = "Edit">
+						</form:form></td>
 				</tr>	
 			</c:forEach>
 	</table>
-	
+	<form action = "${pageContext.request.contextPath}/save" method = "post">
+	<input type = "submit"  value = "Add a new user">
+	</form>
+	<form action = "${pageContext.request.contextPath}/delete" method = "post">
+	<input type = "text" name = "sName" path = "sName"/>
+	<input type = "submit"  value = "Delete user">
+	</form>
 	</body>
 </html>
